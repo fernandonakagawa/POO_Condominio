@@ -6,9 +6,9 @@ namespace ControleAcessoCondominio
 {
     class Condominio
     {
-        private static int _numeroMoradoresAtivos;
+        private static int _numeroMoradoresAtivos = 0;
         public static int NumeroMoradoresAtivos { get => _numeroMoradoresAtivos; 
-            set => _numeroMoradoresAtivos = value; }
+           private set => _numeroMoradoresAtivos = value; }
         
         private string _nome;
         private List<Morador> _moradores;
