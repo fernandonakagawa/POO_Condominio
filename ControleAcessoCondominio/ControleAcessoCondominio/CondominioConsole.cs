@@ -6,9 +6,9 @@ namespace ControleAcessoCondominio
 {
     class CondominioConsole
     {
-        public static void VerificarAcesso(Condominio c, Morador m)
+        public static void VerificarAcesso(Condominio c, Pessoa p, Morador m = null)
         {
-            Console.WriteLine($"{m.Nome}: {c.VerificarAcesso(m)}");
+            Console.WriteLine($"{p.Nome}: {c.VerificarAcesso(p, m)}");
         }
         public static void MostrarStatus()
         {

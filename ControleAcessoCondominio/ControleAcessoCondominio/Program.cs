@@ -22,6 +22,9 @@ namespace ControleAcessoCondominio
             CondominioConsole.ListarMoradores(c);
             c.AdicionarMorador(new Morador("Cleiton","345678", "654321"));
             CondominioConsole.ListarMoradores(c);
+            Visitante v1 = new Visitante("Juliana", "987654", m2);
+            CondominioConsole.VerificarAcesso(c, v1, m2);
+            CondominioConsole.MostrarStatus();
         }
     }
 }

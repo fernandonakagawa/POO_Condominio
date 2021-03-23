@@ -4,17 +4,21 @@ using System.Text;
 
 namespace ControleAcessoCondominio
 {
-    class Visitante
+    class Visitante:Pessoa
     {
-        private string _nome;
-        private string _cpf;
-        public string Nome { get => _nome; set => _nome = value; }
-        public string Cpf { get => _cpf; set => _cpf = value; }
-
-        public Visitante(string nome, string cpf)
+        private List<Morador> _anfitrioes;
+        public List<Morador> Anfitrioes { get => _anfitrioes; private set => _anfitrioes = value; }
+        
+        public Visitante(string nome, string cpf, Morador anfitriao):base(nome, cpf)
         {
-            Nome = nome;
-            Cpf = cpf;
+            Anfitrioes = new List<Morador>();
+            Anfitrioes.Add(anfitriao);
         }
+        public void AdicionarAnfitriao(Morador m)
+        {
+            Anfitrioes.Add(m);
+        }
+
+        
     }
 }
