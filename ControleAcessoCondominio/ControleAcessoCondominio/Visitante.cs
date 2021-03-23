@@ -13,6 +13,7 @@ namespace ControleAcessoCondominio
         {
             Anfitrioes = new List<Morador>();
             Anfitrioes.Add(anfitriao);
+            this._nome = " ";
         }
         public void AdicionarAnfitriao(Morador m)
         {

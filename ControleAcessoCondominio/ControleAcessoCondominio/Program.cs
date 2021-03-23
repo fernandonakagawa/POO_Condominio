@@ -25,6 +25,12 @@ namespace ControleAcessoCondominio
             Visitante v1 = new Visitante("Juliana", "987654", m2);
             CondominioConsole.VerificarAcesso(c, v1, m2);
             CondominioConsole.MostrarStatus();
+
+            Pessoa p;
+            p = v1;
+            p = m2;
+
+            p._nome = "";
         }
     }
 }

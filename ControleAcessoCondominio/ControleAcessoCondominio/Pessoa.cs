@@ -6,7 +6,7 @@ namespace ControleAcessoCondominio
 {
     class Pessoa
     {
-        private string _nome;
+        protected string _nome;
         private string _cpf;
         private List<Acesso> _acessos;
 
