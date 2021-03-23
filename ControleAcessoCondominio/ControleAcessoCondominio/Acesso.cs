@@ -11,7 +11,7 @@ namespace ControleAcessoCondominio
     class Acesso
     {
         private static int _numeroAcessos = 0;
-        public static int NumeroAcessos { get => _numeroAcessos; private set => NumeroAcessos = value; }
+        public static int NumeroAcessos { get => _numeroAcessos; private set => _numeroAcessos = value; }
 
         private Morador _morador;
         private string _visitantes;

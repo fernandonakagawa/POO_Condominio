@@ -29,13 +29,20 @@ namespace ControleAcessoCondominio
         {
             if (Moradores.IndexOf(m) == -1) return TipoAcesso.Negado;
             if (!m.IsAtivo) return TipoAcesso.Desativado;
+            Acesso a = new Acesso(m, "", TipoAcesso.Permitido);
+            Acessos.Add(a);
             return TipoAcesso.Permitido;
         }
 
-        public void AdicionarMorador(Morador m)
+        public bool AdicionarMorador(Morador m)
         {
-            Moradores.Add(m);
-            if (m.IsAtivo) NumeroMoradoresAtivos++;
+            if (Moradores.IndexOf(m) == -1)
+            {
+                this.Moradores.Add(m);
+                if (m.IsAtivo) NumeroMoradoresAtivos++;
+                return true;
+            }
+            return false;
         }
         public bool AtivarMorador(Morador m, bool ativar)
         {

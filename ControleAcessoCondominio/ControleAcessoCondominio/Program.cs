@@ -6,7 +6,22 @@ namespace ControleAcessoCondominio
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Condominio c = new Condominio("Monte Senai");
+            Morador m1 = new Morador("Fulano", "123456", "123456");
+            Morador m2 = new Morador("Mariazinha", "234567", "555444");
+            c.AdicionarMorador(m1);
+            c.AdicionarMorador(m2);
+            CondominioConsole.VerificarAcesso(c, m1);
+            CondominioConsole.VerificarAcesso(c, m2);
+            CondominioConsole.VerificarAcesso(c, m1);
+            CondominioConsole.VerificarAcesso(c, m1);
+            CondominioConsole.MostrarStatus();
+            c.AtivarMorador(m1, false);
+            CondominioConsole.VerificarAcesso(c, m1);
+            CondominioConsole.MostrarStatus();
+            CondominioConsole.ListarMoradores(c);
+            c.AdicionarMorador(new Morador("Cleiton","345678", "654321"));
+            CondominioConsole.ListarMoradores(c);
         }
     }
 }
