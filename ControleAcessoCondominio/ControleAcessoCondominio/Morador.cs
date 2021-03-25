@@ -6,6 +6,7 @@ namespace ControleAcessoCondominio
 {
     class Morador:Pessoa
     {
+        public const int TAM_MIN_SENHA = 6;
         private string _senha;
         private bool _isAtivo;
         
@@ -23,7 +24,7 @@ namespace ControleAcessoCondominio
 
         public bool MudarSenha(string senha)
         {
-            if (senha.Length < 6) return false;
+            if (senha.Length < TAM_MIN_SENHA) return false;
             Senha = senha;
             return true;
         }
