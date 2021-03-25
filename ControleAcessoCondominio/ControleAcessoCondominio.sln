@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleAcessoCondominio", "ControleAcessoCondominio\ControleAcessoCondominio.csproj", "{D37579F3-7ABF-4E8F-852B-F04C5762756B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleAcessoCondominio", "ControleAcessoCondominio\ControleAcessoCondominio.csproj", "{C073F18C-9C9F-4A16-9B0A-C627FC5E1261}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D37579F3-7ABF-4E8F-852B-F04C5762756B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D37579F3-7ABF-4E8F-852B-F04C5762756B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D37579F3-7ABF-4E8F-852B-F04C5762756B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D37579F3-7ABF-4E8F-852B-F04C5762756B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C073F18C-9C9F-4A16-9B0A-C627FC5E1261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C073F18C-9C9F-4A16-9B0A-C627FC5E1261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C073F18C-9C9F-4A16-9B0A-C627FC5E1261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C073F18C-9C9F-4A16-9B0A-C627FC5E1261}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {392E42D5-EAF1-4B1F-BF8B-66A7323D7BE4}
+		SolutionGuid = {BFFD65CA-845A-4E22-8482-D10BC6D7C50D}
 	EndGlobalSection
 EndGlobal
