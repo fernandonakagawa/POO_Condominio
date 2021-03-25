@@ -20,7 +20,7 @@ namespace ControleAcessoCondominio
             Console.WriteLine("=====Lista de Moradores=====");
             foreach(Morador m in c.Moradores)
             {
-                Console.WriteLine($"{m.Nome} {m.Cpf}");
+                Console.WriteLine($"{m.Nome} {m.Cpf} {m.IsAtivo}");
             }
             Console.WriteLine();
         }

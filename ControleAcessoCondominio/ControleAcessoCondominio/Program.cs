@@ -30,7 +30,7 @@ namespace ControleAcessoCondominio
             p = v1;
             p = m2;
 
-            p._nome = "";
+            //p._nome = "";
         }
     }
 }
