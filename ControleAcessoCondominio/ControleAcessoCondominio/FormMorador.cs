@@ -47,6 +47,9 @@ namespace ControleAcessoCondominio
                     item.SubItems.Add("Sim");
                     lvMoradores.Items.Add(item);
                     MessageBox.Show("Morador adicionado com sucesso!");
+                    tbNome.Text = "";
+                    tbCpf.Text = "";
+                    tbSenha.Text = "";
                 }
                 else
                 {
@@ -56,6 +59,79 @@ namespace ControleAcessoCondominio
             else
             {
                 MessageBox.Show("Dados incompletos ou senha com menos de 6 caracteres!");
+            }
+        }
+
+        private void btAtivarMorador_Click(object sender, EventArgs e)
+        {
+            if (lvMoradores.SelectedItems.Count > 0)
+            {
+                ListViewItem itemMorador = lvMoradores.SelectedItems[0];
+                //int indice = lvMoradores.SelectedIndices[0];
+                string cpf = itemMorador.SubItems[1].Text;
+                Morador m = Condominio.Self.BuscarMorador(cpf);
+                if(m != null)
+                {
+                    Condominio.Self.AtivarMorador(m, !m.IsAtivo);
+                    if (m.IsAtivo) itemMorador.SubItems[2].Text = "Sim";
+                    else itemMorador.SubItems[2].Text = "Não";
+                }
+
+            }
+            btAtivarMorador.Enabled = false;
+            btMudarSenha.Enabled = false;
+        }
+
+        private void lvMoradores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvMoradores.SelectedItems.Count > 0)
+            {
+                btAtivarMorador.Enabled = true ;
+                btMudarSenha.Enabled = true;
+            }
+            else
+            {
+                btAtivarMorador.Enabled = false;
+                btMudarSenha.Enabled = false;
+            }
+        }
+
+        private void btMudarSenha_Click(object sender, EventArgs e)
+        {
+            if (lvMoradores.SelectedItems.Count > 0)
+            {
+                lbNovaSenha.Visible = true;
+                tbNovaSenha.Visible = true;
+                btOkNovaSenha.Visible = true;
+                btAtivarMorador.Enabled = false;
+                btMudarSenha.Enabled = false;
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btOkNovaSenha_Click(object sender, EventArgs e)
+        {
+            if (lvMoradores.SelectedItems.Count > 0)
+            {
+                ListViewItem itemMorador = lvMoradores.SelectedItems[0];
+                //int indice = lvMoradores.SelectedIndices[0];
+                string cpf = itemMorador.SubItems[1].Text;
+                Morador m = Condominio.Self.BuscarMorador(cpf);
+                if (m != null)
+                {
+                    if (m.MudarSenha(tbNovaSenha.Text)) MessageBox.Show("Senha modificada com sucesso!");
+                    else MessageBox.Show("A senha precisa ter mais de 6 dígitos");
+                }
+                lbNovaSenha.Visible = false;
+                tbNovaSenha.Visible = false;
+                btOkNovaSenha.Visible = false;
+                btAtivarMorador.Enabled = false;
+                btMudarSenha.Enabled = false;
+                tbNovaSenha.Text = "";
             }
         }
     }

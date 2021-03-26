@@ -180,6 +180,7 @@ namespace ControleAcessoCondominio
             this.btAdicionarVisitante.TabIndex = 5;
             this.btAdicionarVisitante.Text = "Adicionar Visitante";
             this.btAdicionarVisitante.UseVisualStyleBackColor = true;
+            this.btAdicionarVisitante.Click += new System.EventHandler(this.btAdicionarVisitante_Click);
             // 
             // FormPainelDeControle
             // 

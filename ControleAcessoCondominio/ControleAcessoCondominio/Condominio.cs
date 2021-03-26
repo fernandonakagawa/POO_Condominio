@@ -15,9 +15,11 @@ namespace ControleAcessoCondominio
 
         private string _nome;
         private List<Morador> _moradores;
+        private List<Visitante> _visitantes;
         private List<Acesso> _acessos;
         public string Nome { get => _nome; private set => _nome = value; }
         public List<Morador> Moradores { get => _moradores; private set => _moradores = value; }
+        public List<Visitante> Visitantes { get => _visitantes; private set => _visitantes = value; }
         public List<Acesso> Acessos { get => _acessos; private set => _acessos = value; }
 
 
@@ -25,6 +27,7 @@ namespace ControleAcessoCondominio
         {
             Nome = nome;
             this.Moradores = new List<Morador>();
+            this.Visitantes = new List<Visitante>();
             this.Acessos = new List<Acesso>();
         }
 
@@ -52,9 +55,29 @@ namespace ControleAcessoCondominio
         {
             if (Moradores.IndexOf(m) == -1)
             {
+                foreach(Morador morador in Moradores)
+                {
+                    if (morador.Cpf.Equals(m.Cpf)) return false;
+                }
                 this.Moradores.Add(m);
                 if (m.IsAtivo) NumeroMoradoresAtivos++;
                 return true;
+            }
+            return false;
+        }
+
+        public bool AdicionarVisitante(Visitante v)
+        {
+            foreach(Morador m in v.Anfitrioes)
+            {
+                foreach(Morador x in Moradores)
+                {
+                    if(m == x && m.IsAtivo)
+                    {
+                        Visitantes.Add(v);
+                        return true;
+                    }
+                }
             }
             return false;
         }
@@ -67,6 +90,15 @@ namespace ControleAcessoCondominio
             m.IsAtivo = ativar;
 
             return true;
+        }
+
+        public Morador BuscarMorador(string cpf)
+        {
+            foreach(Morador m in Moradores)
+            {
+                if (m.Cpf.Equals(cpf)) return m;
+            }
+            return null;
         }
     }
 }

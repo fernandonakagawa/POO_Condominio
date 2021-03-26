@@ -37,12 +37,15 @@ namespace ControleAcessoCondominio
             this.label3 = new System.Windows.Forms.Label();
             this.btAdicionarMorador = new System.Windows.Forms.Button();
             this.lvMoradores = new System.Windows.Forms.ListView();
-            this.btAtivarMorador = new System.Windows.Forms.Button();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btAtivarMorador = new System.Windows.Forms.Button();
             this.btMudarSenha = new System.Windows.Forms.Button();
             this.btVoltar = new System.Windows.Forms.Button();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tbNovaSenha = new System.Windows.Forms.TextBox();
+            this.lbNovaSenha = new System.Windows.Forms.Label();
+            this.btOkNovaSenha = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -119,15 +122,7 @@ namespace ControleAcessoCondominio
             this.lvMoradores.TabIndex = 7;
             this.lvMoradores.UseCompatibleStateImageBehavior = false;
             this.lvMoradores.View = System.Windows.Forms.View.Details;
-            // 
-            // btAtivarMorador
-            // 
-            this.btAtivarMorador.Location = new System.Drawing.Point(384, 415);
-            this.btAtivarMorador.Name = "btAtivarMorador";
-            this.btAtivarMorador.Size = new System.Drawing.Size(128, 23);
-            this.btAtivarMorador.TabIndex = 8;
-            this.btAtivarMorador.Text = "Ativar/Desativar Morador";
-            this.btAtivarMorador.UseVisualStyleBackColor = true;
+            this.lvMoradores.SelectedIndexChanged += new System.EventHandler(this.lvMoradores_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -139,14 +134,31 @@ namespace ControleAcessoCondominio
             this.columnHeader2.Text = "CPF";
             this.columnHeader2.Width = 160;
             // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Ativo";
+            // 
+            // btAtivarMorador
+            // 
+            this.btAtivarMorador.Enabled = false;
+            this.btAtivarMorador.Location = new System.Drawing.Point(384, 415);
+            this.btAtivarMorador.Name = "btAtivarMorador";
+            this.btAtivarMorador.Size = new System.Drawing.Size(128, 23);
+            this.btAtivarMorador.TabIndex = 8;
+            this.btAtivarMorador.Text = "Ativar/Desativar Morador";
+            this.btAtivarMorador.UseVisualStyleBackColor = true;
+            this.btAtivarMorador.Click += new System.EventHandler(this.btAtivarMorador_Click);
+            // 
             // btMudarSenha
             // 
+            this.btMudarSenha.Enabled = false;
             this.btMudarSenha.Location = new System.Drawing.Point(250, 415);
             this.btMudarSenha.Name = "btMudarSenha";
             this.btMudarSenha.Size = new System.Drawing.Size(128, 23);
             this.btMudarSenha.TabIndex = 9;
             this.btMudarSenha.Text = "Mudar Senha";
             this.btMudarSenha.UseVisualStyleBackColor = true;
+            this.btMudarSenha.Click += new System.EventHandler(this.btMudarSenha_Click);
             // 
             // btVoltar
             // 
@@ -158,15 +170,45 @@ namespace ControleAcessoCondominio
             this.btVoltar.UseVisualStyleBackColor = true;
             this.btVoltar.Click += new System.EventHandler(this.btVoltar_Click);
             // 
-            // columnHeader3
+            // tbNovaSenha
             // 
-            this.columnHeader3.Text = "Ativo";
+            this.tbNovaSenha.Location = new System.Drawing.Point(99, 460);
+            this.tbNovaSenha.Name = "tbNovaSenha";
+            this.tbNovaSenha.PasswordChar = '*';
+            this.tbNovaSenha.Size = new System.Drawing.Size(273, 20);
+            this.tbNovaSenha.TabIndex = 12;
+            this.tbNovaSenha.Visible = false;
+            // 
+            // lbNovaSenha
+            // 
+            this.lbNovaSenha.AutoSize = true;
+            this.lbNovaSenha.Location = new System.Drawing.Point(23, 463);
+            this.lbNovaSenha.Name = "lbNovaSenha";
+            this.lbNovaSenha.Size = new System.Drawing.Size(70, 13);
+            this.lbNovaSenha.TabIndex = 11;
+            this.lbNovaSenha.Text = "Nova Senha:";
+            this.lbNovaSenha.Visible = false;
+            this.lbNovaSenha.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // btOkNovaSenha
+            // 
+            this.btOkNovaSenha.Location = new System.Drawing.Point(384, 458);
+            this.btOkNovaSenha.Name = "btOkNovaSenha";
+            this.btOkNovaSenha.Size = new System.Drawing.Size(128, 23);
+            this.btOkNovaSenha.TabIndex = 13;
+            this.btOkNovaSenha.Text = "OK";
+            this.btOkNovaSenha.UseVisualStyleBackColor = true;
+            this.btOkNovaSenha.Visible = false;
+            this.btOkNovaSenha.Click += new System.EventHandler(this.btOkNovaSenha_Click);
             // 
             // FormMorador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 450);
+            this.ClientSize = new System.Drawing.Size(540, 492);
+            this.Controls.Add(this.btOkNovaSenha);
+            this.Controls.Add(this.tbNovaSenha);
+            this.Controls.Add(this.lbNovaSenha);
             this.Controls.Add(this.btVoltar);
             this.Controls.Add(this.btMudarSenha);
             this.Controls.Add(this.btAtivarMorador);
@@ -202,5 +244,8 @@ namespace ControleAcessoCondominio
         private System.Windows.Forms.Button btMudarSenha;
         private System.Windows.Forms.Button btVoltar;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.TextBox tbNovaSenha;
+        private System.Windows.Forms.Label lbNovaSenha;
+        private System.Windows.Forms.Button btOkNovaSenha;
     }
 }

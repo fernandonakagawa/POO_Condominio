@@ -14,13 +14,14 @@ namespace ControleAcessoCondominio
     {
         private FormConfiguracoes formConfiguracoes;
         private FormMorador formMorador;
-        //private FormVisitante formVisitante;
+        private FormVisitante formVisitante;
         //private FormAcesso formAcesso;
         public FormPainelDeControle()
         {
             InitializeComponent();
             formConfiguracoes = new FormConfiguracoes(this);
             formMorador = new FormMorador(this);
+            formVisitante = new FormVisitante(this);
         }
 
         private void btConfiguracoes_Click(object sender, EventArgs e)
@@ -66,6 +67,13 @@ namespace ControleAcessoCondominio
         private void btAdicionarMorador_Click(object sender, EventArgs e)
         {
             formMorador.Show();
+            this.Hide();
+        }
+
+        private void btAdicionarVisitante_Click(object sender, EventArgs e)
+        {
+            formVisitante.Show();
+            formVisitante.Atualizar();
             this.Hide();
         }
     }
