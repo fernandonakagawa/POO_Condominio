@@ -100,5 +100,27 @@ namespace ControleAcessoCondominio
             }
             return null;
         }
+
+        public List<Visitante> BuscarVisitantes(Morador m)
+        {
+            List<Visitante> lista = new List<Visitante>();
+            foreach(Visitante v in this.Visitantes)
+            {
+                foreach(Morador anfitriao in v.Anfitrioes)
+                {
+                    if (anfitriao == m && !lista.Contains(v)) lista.Add(v); 
+                }
+            }
+            return lista;
+        }
+
+        public Visitante BuscarVisitante(string cpf)
+        {
+            foreach(Visitante v in this.Visitantes)
+            {
+                if (v.Cpf.Equals(cpf)) return v;
+            }
+            return null;
+        }
     }
 }

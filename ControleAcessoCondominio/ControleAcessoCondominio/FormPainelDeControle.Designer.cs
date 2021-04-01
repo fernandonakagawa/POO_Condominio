@@ -138,6 +138,7 @@ namespace ControleAcessoCondominio
             this.btVerificacaoAcesso.TabIndex = 1;
             this.btVerificacaoAcesso.Text = "Verificação de Acesso";
             this.btVerificacaoAcesso.UseVisualStyleBackColor = true;
+            this.btVerificacaoAcesso.Click += new System.EventHandler(this.btVerificacaoAcesso_Click);
             // 
             // btConfiguracoes
             // 

@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="Acesso.cs" />
     <Compile Include="Condominio.cs" />
+    <Compile Include="FormAcesso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAcesso.Designer.cs">
+      <DependentUpon>FormAcesso.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMorador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visitante.cs" />
+    <EmbeddedResource Include="FormAcesso.resx">
+      <DependentUpon>FormAcesso.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMorador.resx">
       <DependentUpon>FormMorador.cs</DependentUpon>
     </EmbeddedResource>
