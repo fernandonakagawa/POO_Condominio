@@ -46,6 +46,8 @@ namespace ControleAcessoCondominio
             this.tbNovaSenha = new System.Windows.Forms.TextBox();
             this.lbNovaSenha = new System.Windows.Forms.Label();
             this.btOkNovaSenha = new System.Windows.Forms.Button();
+            this.dgvMoradores = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -201,11 +203,20 @@ namespace ControleAcessoCondominio
             this.btOkNovaSenha.Visible = false;
             this.btOkNovaSenha.Click += new System.EventHandler(this.btOkNovaSenha_Click);
             // 
+            // dgvMoradores
+            // 
+            this.dgvMoradores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMoradores.Location = new System.Drawing.Point(519, 178);
+            this.dgvMoradores.Name = "dgvMoradores";
+            this.dgvMoradores.Size = new System.Drawing.Size(491, 228);
+            this.dgvMoradores.TabIndex = 14;
+            // 
             // FormMorador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 492);
+            this.ClientSize = new System.Drawing.Size(1022, 492);
+            this.Controls.Add(this.dgvMoradores);
             this.Controls.Add(this.btOkNovaSenha);
             this.Controls.Add(this.tbNovaSenha);
             this.Controls.Add(this.lbNovaSenha);
@@ -223,6 +234,7 @@ namespace ControleAcessoCondominio
             this.Name = "FormMorador";
             this.Text = "Moradores";
             this.Load += new System.EventHandler(this.FormMorador_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,5 +259,6 @@ namespace ControleAcessoCondominio
         private System.Windows.Forms.TextBox tbNovaSenha;
         private System.Windows.Forms.Label lbNovaSenha;
         private System.Windows.Forms.Button btOkNovaSenha;
+        private System.Windows.Forms.DataGridView dgvMoradores;
     }
 }

@@ -25,5 +25,9 @@ namespace ControleAcessoCondominio
             TipoAcesso = tipoAcesso;
             if (this.TipoAcesso == TipoAcesso.Permitido) NumeroAcessos++;
         }
+        public Acesso(Condominio c, string cpf, TipoAcesso tipoAcesso)
+        {
+            //... fazer toda a implementação
+        }
     }
 }

@@ -55,11 +55,23 @@ namespace ControleAcessoCondominio
                 {
                     MessageBox.Show("Erro ao adicionar morador!");
                 }
+
+                //inserir no banco
+                try{Banco.InserirMorador(m);}
+                catch(Exception exception){MessageBox.Show($"Erro ao adicionar morador no banco! {exception}");}
+                
+                try { AtualizarMoradores(); }
+                catch(Exception exception) { MessageBox.Show($"Erro ao obter moradores no banco! {exception}"); }
             }
             else
             {
                 MessageBox.Show("Dados incompletos ou senha com menos de 6 caracteres!");
             }
+        }
+
+        private void AtualizarMoradores()
+        {
+
         }
 
         private void btAtivarMorador_Click(object sender, EventArgs e)

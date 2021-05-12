@@ -20,5 +20,11 @@ namespace ControleAcessoCondominio
             Cpf = cpf;
             Acessos = new List<Acesso>();
         }
+        public Pessoa(string cpf)
+        {
+            Nome = "Sem Nome";
+            Cpf = cpf;
+            Acessos = new List<Acesso>();
+        }
     }
 }

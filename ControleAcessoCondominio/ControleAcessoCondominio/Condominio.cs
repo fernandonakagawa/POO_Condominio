@@ -18,7 +18,8 @@ namespace ControleAcessoCondominio
         private List<Visitante> _visitantes;
         private List<Acesso> _acessos;
         public string Nome { get => _nome; private set => _nome = value; }
-        public List<Morador> Moradores { get => _moradores; private set => _moradores = value; }
+        public List<Morador> Moradores 
+        { get => _moradores; private set => _moradores = value; }
         public List<Visitante> Visitantes { get => _visitantes; private set => _visitantes = value; }
         public List<Acesso> Acessos { get => _acessos; private set => _acessos = value; }
 
@@ -80,6 +81,17 @@ namespace ControleAcessoCondominio
                 }
             }
             return false;
+        }
+        public bool AdicionarVisitante(string nome, Morador m)
+        {
+            List<Visitante> visitantes = BuscarVisitantes(m);
+            Visitante v = null;
+            foreach(Visitante x in visitantes)
+            {
+                if (x.Nome.Equals(nome)) v = x;
+            }
+            if (v == null) v = new Visitante(nome, m);
+            return AdicionarVisitante(v);
         }
         public bool AtivarMorador(Morador m, bool ativar)
         {

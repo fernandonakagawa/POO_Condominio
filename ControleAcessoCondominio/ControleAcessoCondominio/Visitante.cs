@@ -15,6 +15,12 @@ namespace ControleAcessoCondominio
             Anfitrioes.Add(anfitriao);
             //this._nome = " ";
         }
+        public Visitante(string nome, Morador anfitriao) : base(nome, "")
+        {
+            Anfitrioes = new List<Morador>();
+            Anfitrioes.Add(anfitriao);
+            //this._nome = " ";
+        }
         public void AdicionarAnfitriao(Morador m)
         {
             Anfitrioes.Add(m);
