@@ -34,3 +34,8 @@ SELECT * FROM Pessoas;
 SELECT * FROM Moradores;
 
 INSERT INTO Pessoas (Nome, Cpf) output INSERTED.IdPessoa VALUES ('nome','123123');
+
+SELECT Pessoas.Nome, Pessoas.Cpf, Moradores.IsAtivo
+FROM Pessoas
+INNER JOIN Moradores ON Pessoas.IdPessoa = Moradores.IdMorador
+AND Pessoas.Nome LIKE '%g%'; 

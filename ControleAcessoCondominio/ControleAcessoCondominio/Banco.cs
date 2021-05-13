@@ -18,8 +18,12 @@ namespace ControleAcessoCondominio
         {
             conexao.ConnectionString = @"Data Source=(local)\sqlexpress;Initial Catalog=Condominio;Integrated Security=True";
             sql.Connection = conexao;
-            SqlDataAdapter adaptador = new SqlDataAdapter(sql.CommandText, conexao);
+            SqlDataAdapter adaptador = new SqlDataAdapter(sql);
             return adaptador;
+        }
+        public static void FecharConexao()
+        {
+            conexao.Close();
         }
         public static int Executar(out SqlDataAdapter adaptador, int metodo = EXECUTE_NON_QUERY)
         {
@@ -75,7 +79,21 @@ namespace ControleAcessoCondominio
         public static SqlDataAdapter SelectMoradores()
         {
             sql = new SqlCommand();
-            sql.CommandText = "SELECT * FROM Moradores";
+            sql.CommandText = "SELECT Pessoas.Nome, Pessoas.Cpf, Moradores.IsAtivo " +
+                "FROM Pessoas " +
+                "INNER JOIN Moradores ON Pessoas.IdPessoa = Moradores.IdMorador; ";
+            Executar(out SqlDataAdapter adaptador);
+            return adaptador;
+        }
+
+        public static SqlDataAdapter BuscarMoradores(string nome)
+        {
+            sql = new SqlCommand();
+            sql.CommandText = "SELECT Pessoas.Nome, Pessoas.Cpf, Moradores.IsAtivo " +
+                "FROM Pessoas " +
+                "INNER JOIN Moradores ON Pessoas.IdPessoa = Moradores.IdMorador " +
+                $"AND Pessoas.Nome LIKE '%{nome}%'; ";
+            //sql.Parameters.AddWithValue("@nome", nome);
             Executar(out SqlDataAdapter adaptador);
             return adaptador;
         }

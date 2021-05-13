@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ControleAcessoCondominio
 
         private void FormMorador_Load(object sender, EventArgs e)
         {
-
+            AtualizarMoradores();
         }
 
         private void btVoltar_Click(object sender, EventArgs e)
@@ -58,10 +59,18 @@ namespace ControleAcessoCondominio
 
                 //inserir no banco
                 try{Banco.InserirMorador(m);}
-                catch(Exception exception){MessageBox.Show($"Erro ao adicionar morador no banco! {exception}");}
+                catch(Exception exception)
+                {
+                    Banco.FecharConexao();
+                    MessageBox.Show($"Erro ao adicionar morador no banco! {exception}");
+                }
                 
                 try { AtualizarMoradores(); }
-                catch(Exception exception) { MessageBox.Show($"Erro ao obter moradores no banco! {exception}"); }
+                catch(Exception exception) 
+                {
+                    Banco.FecharConexao();
+                    MessageBox.Show($"Erro ao obter moradores no banco! {exception}"); 
+                }
             }
             else
             {
@@ -69,9 +78,33 @@ namespace ControleAcessoCondominio
             }
         }
 
-        private void AtualizarMoradores()
+        private void AtualizarMoradores(SqlDataAdapter adaptador = null, 
+            string textoLabel = "TODOS os moradores:")
         {
+            if(adaptador == null) adaptador = Banco.SelectMoradores();
 
+            DataTable tabela = new DataTable();
+            adaptador.Fill(tabela);
+            //Populando a DataGridView
+            dgvMoradores.DataSource = tabela;
+
+            //Populando a ListView
+            lvMoradores.Items.Clear();
+            
+            for (int i = 0; i < tabela.Rows.Count; i++)
+            {
+                DataRow drow = tabela.Rows[i];
+                if (drow.RowState != DataRowState.Deleted)
+                {
+                    ListViewItem lvi = new ListViewItem(drow["Nome"].ToString());
+                    lvi.SubItems.Add(drow["Cpf"].ToString());
+                    lvi.SubItems.Add(drow["IsAtivo"].ToString());
+
+                    lvMoradores.Items.Add(lvi);
+                }
+            }
+
+            lbBusca.Text = textoLabel;
         }
 
         private void btAtivarMorador_Click(object sender, EventArgs e)
@@ -145,6 +178,28 @@ namespace ControleAcessoCondominio
                 btMudarSenha.Enabled = false;
                 tbNovaSenha.Text = "";
             }
+        }
+
+        private void btBuscarMoradorNome_Click(object sender, EventArgs e)
+        {
+            string nome = tbBuscaNome.Text;
+            lbBusca.Text = $"Resultados da busca pelo nome {nome}:";
+            try
+            {
+                SqlDataAdapter adaptador = Banco.BuscarMoradores(nome);
+                AtualizarMoradores(adaptador, $"Resultados da busca por {nome}:");
+            }
+            catch(Exception exception)
+            {
+                Banco.FecharConexao();
+                MessageBox.Show($"Erro ao buscar morador! {exception.ToString()}");
+            }
+
+        }
+
+        private void FormMorador_Shown(object sender, EventArgs e)
+        {
+            AtualizarMoradores();
         }
     }
 }

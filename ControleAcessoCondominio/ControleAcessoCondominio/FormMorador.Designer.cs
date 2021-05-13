@@ -47,7 +47,13 @@ namespace ControleAcessoCondominio
             this.lbNovaSenha = new System.Windows.Forms.Label();
             this.btOkNovaSenha = new System.Windows.Forms.Button();
             this.dgvMoradores = new System.Windows.Forms.DataGridView();
+            this.gbBuscaMorador = new System.Windows.Forms.GroupBox();
+            this.tbBuscaNome = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btBuscarMoradorNome = new System.Windows.Forms.Button();
+            this.lbBusca = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).BeginInit();
+            this.gbBuscaMorador.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -118,9 +124,9 @@ namespace ControleAcessoCondominio
             this.lvMoradores.FullRowSelect = true;
             this.lvMoradores.GridLines = true;
             this.lvMoradores.HideSelection = false;
-            this.lvMoradores.Location = new System.Drawing.Point(26, 178);
+            this.lvMoradores.Location = new System.Drawing.Point(26, 204);
             this.lvMoradores.Name = "lvMoradores";
-            this.lvMoradores.Size = new System.Drawing.Size(486, 228);
+            this.lvMoradores.Size = new System.Drawing.Size(486, 202);
             this.lvMoradores.TabIndex = 7;
             this.lvMoradores.UseCompatibleStateImageBehavior = false;
             this.lvMoradores.View = System.Windows.Forms.View.Details;
@@ -206,16 +212,65 @@ namespace ControleAcessoCondominio
             // dgvMoradores
             // 
             this.dgvMoradores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMoradores.Location = new System.Drawing.Point(519, 178);
+            this.dgvMoradores.Location = new System.Drawing.Point(519, 204);
             this.dgvMoradores.Name = "dgvMoradores";
-            this.dgvMoradores.Size = new System.Drawing.Size(491, 228);
+            this.dgvMoradores.Size = new System.Drawing.Size(491, 202);
             this.dgvMoradores.TabIndex = 14;
+            // 
+            // gbBuscaMorador
+            // 
+            this.gbBuscaMorador.Controls.Add(this.btBuscarMoradorNome);
+            this.gbBuscaMorador.Controls.Add(this.tbBuscaNome);
+            this.gbBuscaMorador.Controls.Add(this.label4);
+            this.gbBuscaMorador.Location = new System.Drawing.Point(519, 63);
+            this.gbBuscaMorador.Name = "gbBuscaMorador";
+            this.gbBuscaMorador.Size = new System.Drawing.Size(491, 100);
+            this.gbBuscaMorador.TabIndex = 15;
+            this.gbBuscaMorador.TabStop = false;
+            this.gbBuscaMorador.Text = "Buscar Morador";
+            // 
+            // tbBuscaNome
+            // 
+            this.tbBuscaNome.Location = new System.Drawing.Point(50, 32);
+            this.tbBuscaNome.Name = "tbBuscaNome";
+            this.tbBuscaNome.Size = new System.Drawing.Size(273, 20);
+            this.tbBuscaNome.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Nome:";
+            // 
+            // btBuscarMoradorNome
+            // 
+            this.btBuscarMoradorNome.Location = new System.Drawing.Point(50, 65);
+            this.btBuscarMoradorNome.Name = "btBuscarMoradorNome";
+            this.btBuscarMoradorNome.Size = new System.Drawing.Size(159, 27);
+            this.btBuscarMoradorNome.TabIndex = 16;
+            this.btBuscarMoradorNome.Text = "Buscar morador por nome";
+            this.btBuscarMoradorNome.UseVisualStyleBackColor = true;
+            this.btBuscarMoradorNome.Click += new System.EventHandler(this.btBuscarMoradorNome_Click);
+            // 
+            // lbBusca
+            // 
+            this.lbBusca.AutoSize = true;
+            this.lbBusca.Location = new System.Drawing.Point(29, 178);
+            this.lbBusca.Name = "lbBusca";
+            this.lbBusca.Size = new System.Drawing.Size(114, 13);
+            this.lbBusca.TabIndex = 16;
+            this.lbBusca.Text = "TODOS os moradores:";
             // 
             // FormMorador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1022, 492);
+            this.Controls.Add(this.lbBusca);
+            this.Controls.Add(this.gbBuscaMorador);
             this.Controls.Add(this.dgvMoradores);
             this.Controls.Add(this.btOkNovaSenha);
             this.Controls.Add(this.tbNovaSenha);
@@ -234,7 +289,10 @@ namespace ControleAcessoCondominio
             this.Name = "FormMorador";
             this.Text = "Moradores";
             this.Load += new System.EventHandler(this.FormMorador_Load);
+            this.Shown += new System.EventHandler(this.FormMorador_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).EndInit();
+            this.gbBuscaMorador.ResumeLayout(false);
+            this.gbBuscaMorador.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,5 +318,10 @@ namespace ControleAcessoCondominio
         private System.Windows.Forms.Label lbNovaSenha;
         private System.Windows.Forms.Button btOkNovaSenha;
         private System.Windows.Forms.DataGridView dgvMoradores;
+        private System.Windows.Forms.GroupBox gbBuscaMorador;
+        private System.Windows.Forms.Button btBuscarMoradorNome;
+        private System.Windows.Forms.TextBox tbBuscaNome;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbBusca;
     }
 }
