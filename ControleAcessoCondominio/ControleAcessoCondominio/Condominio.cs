@@ -58,7 +58,7 @@ namespace ControleAcessoCondominio
             {
                 foreach(Morador morador in Moradores)
                 {
-                    if (morador.Cpf.Equals(m.Cpf)) return false;
+                    if (morador.Cpf.Equals(m.Cpf.Trim())) return false;
                 }
                 this.Moradores.Add(m);
                 if (m.IsAtivo) NumeroMoradoresAtivos++;
@@ -106,6 +106,7 @@ namespace ControleAcessoCondominio
 
         public Morador BuscarMorador(string cpf)
         {
+            cpf = cpf.Trim();
             foreach(Morador m in Moradores)
             {
                 if (m.Cpf.Equals(cpf)) return m;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace ControleAcessoCondominio
 {
@@ -96,6 +97,38 @@ namespace ControleAcessoCondominio
             //sql.Parameters.AddWithValue("@nome", nome);
             Executar(out SqlDataAdapter adaptador);
             return adaptador;
+        }
+
+        public static int MudarSenhaMorador(Morador m, string senha)
+        {
+            if (senha.Length < Morador.TAM_MIN_SENHA) return 0;
+
+            int linhasAfetadas = 0;
+            string cpf = m.Cpf;
+            sql = new SqlCommand();
+            sql.CommandText = "UPDATE Moradores " +
+                "SET Senha = @senha " +
+                "WHERE IdMorador = (SELECT IdPessoa FROM Pessoas WHERE Cpf = @cpf); ";
+            sql.Parameters.AddWithValue("@senha", senha);
+            sql.Parameters.AddWithValue("@cpf", cpf);
+            linhasAfetadas = Executar();
+            Debug.WriteLine($"MudarSenhaMorador {linhasAfetadas}");
+            return linhasAfetadas;
+        }
+
+        public static int MudarIsAtivoMorador(Morador m, bool isAtivo)
+        {
+            int linhasAfetadas = 0;
+            string cpf = m.Cpf;
+            sql = new SqlCommand();
+            sql.CommandText = "UPDATE Moradores " +
+                "SET IsAtivo = @isativo " +
+                "WHERE IdMorador = (SELECT IdPessoa FROM Pessoas WHERE Cpf = @cpf); ";
+            sql.Parameters.AddWithValue("@isativo", isAtivo);
+            sql.Parameters.AddWithValue("@cpf", cpf);
+            linhasAfetadas = Executar();
+            Debug.WriteLine($"MudarIsAtivoMorador {linhasAfetadas}");
+            return linhasAfetadas;
         }
     }
 }

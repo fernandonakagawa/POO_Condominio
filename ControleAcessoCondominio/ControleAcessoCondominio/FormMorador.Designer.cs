@@ -48,10 +48,15 @@ namespace ControleAcessoCondominio
             this.btOkNovaSenha = new System.Windows.Forms.Button();
             this.dgvMoradores = new System.Windows.Forms.DataGridView();
             this.gbBuscaMorador = new System.Windows.Forms.GroupBox();
+            this.btBuscarMoradorNome = new System.Windows.Forms.Button();
             this.tbBuscaNome = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btBuscarMoradorNome = new System.Windows.Forms.Button();
             this.lbBusca = new System.Windows.Forms.Label();
+            this.btMudarSenhaDgv = new System.Windows.Forms.Button();
+            this.btAtivarMoradorDgv = new System.Windows.Forms.Button();
+            this.btOkNovaSenhaDgv = new System.Windows.Forms.Button();
+            this.tbNovaSenhaDgv = new System.Windows.Forms.TextBox();
+            this.lbNovaSenhaDgv = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).BeginInit();
             this.gbBuscaMorador.SuspendLayout();
             this.SuspendLayout();
@@ -216,6 +221,10 @@ namespace ControleAcessoCondominio
             this.dgvMoradores.Name = "dgvMoradores";
             this.dgvMoradores.Size = new System.Drawing.Size(491, 202);
             this.dgvMoradores.TabIndex = 14;
+            this.dgvMoradores.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvMoradores_CellBeginEdit);
+            this.dgvMoradores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMoradores_CellContentClick);
+            this.dgvMoradores.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvMoradores_RowStateChanged);
+            this.dgvMoradores.SelectionChanged += new System.EventHandler(this.dgvMoradores_SelectionChanged);
             // 
             // gbBuscaMorador
             // 
@@ -228,6 +237,16 @@ namespace ControleAcessoCondominio
             this.gbBuscaMorador.TabIndex = 15;
             this.gbBuscaMorador.TabStop = false;
             this.gbBuscaMorador.Text = "Buscar Morador";
+            // 
+            // btBuscarMoradorNome
+            // 
+            this.btBuscarMoradorNome.Location = new System.Drawing.Point(50, 65);
+            this.btBuscarMoradorNome.Name = "btBuscarMoradorNome";
+            this.btBuscarMoradorNome.Size = new System.Drawing.Size(159, 27);
+            this.btBuscarMoradorNome.TabIndex = 16;
+            this.btBuscarMoradorNome.Text = "Buscar morador por nome";
+            this.btBuscarMoradorNome.UseVisualStyleBackColor = true;
+            this.btBuscarMoradorNome.Click += new System.EventHandler(this.btBuscarMoradorNome_Click);
             // 
             // tbBuscaNome
             // 
@@ -245,16 +264,6 @@ namespace ControleAcessoCondominio
             this.label4.TabIndex = 2;
             this.label4.Text = "Nome:";
             // 
-            // btBuscarMoradorNome
-            // 
-            this.btBuscarMoradorNome.Location = new System.Drawing.Point(50, 65);
-            this.btBuscarMoradorNome.Name = "btBuscarMoradorNome";
-            this.btBuscarMoradorNome.Size = new System.Drawing.Size(159, 27);
-            this.btBuscarMoradorNome.TabIndex = 16;
-            this.btBuscarMoradorNome.Text = "Buscar morador por nome";
-            this.btBuscarMoradorNome.UseVisualStyleBackColor = true;
-            this.btBuscarMoradorNome.Click += new System.EventHandler(this.btBuscarMoradorNome_Click);
-            // 
             // lbBusca
             // 
             this.lbBusca.AutoSize = true;
@@ -264,11 +273,68 @@ namespace ControleAcessoCondominio
             this.lbBusca.TabIndex = 16;
             this.lbBusca.Text = "TODOS os moradores:";
             // 
+            // btMudarSenhaDgv
+            // 
+            this.btMudarSenhaDgv.Enabled = false;
+            this.btMudarSenhaDgv.Location = new System.Drawing.Point(749, 415);
+            this.btMudarSenhaDgv.Name = "btMudarSenhaDgv";
+            this.btMudarSenhaDgv.Size = new System.Drawing.Size(128, 23);
+            this.btMudarSenhaDgv.TabIndex = 18;
+            this.btMudarSenhaDgv.Text = "Mudar Senha";
+            this.btMudarSenhaDgv.UseVisualStyleBackColor = true;
+            this.btMudarSenhaDgv.Click += new System.EventHandler(this.btMudarSenhaDgv_Click);
+            // 
+            // btAtivarMoradorDgv
+            // 
+            this.btAtivarMoradorDgv.Enabled = false;
+            this.btAtivarMoradorDgv.Location = new System.Drawing.Point(883, 415);
+            this.btAtivarMoradorDgv.Name = "btAtivarMoradorDgv";
+            this.btAtivarMoradorDgv.Size = new System.Drawing.Size(128, 23);
+            this.btAtivarMoradorDgv.TabIndex = 17;
+            this.btAtivarMoradorDgv.Text = "Ativar/Desativar Morador";
+            this.btAtivarMoradorDgv.UseVisualStyleBackColor = true;
+            this.btAtivarMoradorDgv.Visible = false;
+            // 
+            // btOkNovaSenhaDgv
+            // 
+            this.btOkNovaSenhaDgv.Location = new System.Drawing.Point(889, 458);
+            this.btOkNovaSenhaDgv.Name = "btOkNovaSenhaDgv";
+            this.btOkNovaSenhaDgv.Size = new System.Drawing.Size(128, 23);
+            this.btOkNovaSenhaDgv.TabIndex = 21;
+            this.btOkNovaSenhaDgv.Text = "OK";
+            this.btOkNovaSenhaDgv.UseVisualStyleBackColor = true;
+            this.btOkNovaSenhaDgv.Visible = false;
+            this.btOkNovaSenhaDgv.Click += new System.EventHandler(this.btOkNovaSenhaDgv_Click);
+            // 
+            // tbNovaSenhaDgv
+            // 
+            this.tbNovaSenhaDgv.Location = new System.Drawing.Point(604, 460);
+            this.tbNovaSenhaDgv.Name = "tbNovaSenhaDgv";
+            this.tbNovaSenhaDgv.PasswordChar = '*';
+            this.tbNovaSenhaDgv.Size = new System.Drawing.Size(273, 20);
+            this.tbNovaSenhaDgv.TabIndex = 20;
+            this.tbNovaSenhaDgv.Visible = false;
+            // 
+            // lbNovaSenhaDgv
+            // 
+            this.lbNovaSenhaDgv.AutoSize = true;
+            this.lbNovaSenhaDgv.Location = new System.Drawing.Point(528, 463);
+            this.lbNovaSenhaDgv.Name = "lbNovaSenhaDgv";
+            this.lbNovaSenhaDgv.Size = new System.Drawing.Size(70, 13);
+            this.lbNovaSenhaDgv.TabIndex = 19;
+            this.lbNovaSenhaDgv.Text = "Nova Senha:";
+            this.lbNovaSenhaDgv.Visible = false;
+            // 
             // FormMorador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1022, 492);
+            this.Controls.Add(this.btOkNovaSenhaDgv);
+            this.Controls.Add(this.tbNovaSenhaDgv);
+            this.Controls.Add(this.lbNovaSenhaDgv);
+            this.Controls.Add(this.btMudarSenhaDgv);
+            this.Controls.Add(this.btAtivarMoradorDgv);
             this.Controls.Add(this.lbBusca);
             this.Controls.Add(this.gbBuscaMorador);
             this.Controls.Add(this.dgvMoradores);
@@ -290,6 +356,7 @@ namespace ControleAcessoCondominio
             this.Text = "Moradores";
             this.Load += new System.EventHandler(this.FormMorador_Load);
             this.Shown += new System.EventHandler(this.FormMorador_Shown);
+            this.VisibleChanged += new System.EventHandler(this.FormMorador_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).EndInit();
             this.gbBuscaMorador.ResumeLayout(false);
             this.gbBuscaMorador.PerformLayout();
@@ -323,5 +390,10 @@ namespace ControleAcessoCondominio
         private System.Windows.Forms.TextBox tbBuscaNome;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbBusca;
+        private System.Windows.Forms.Button btMudarSenhaDgv;
+        private System.Windows.Forms.Button btAtivarMoradorDgv;
+        private System.Windows.Forms.Button btOkNovaSenhaDgv;
+        private System.Windows.Forms.TextBox tbNovaSenhaDgv;
+        private System.Windows.Forms.Label lbNovaSenhaDgv;
     }
 }

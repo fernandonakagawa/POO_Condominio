@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -90,17 +91,37 @@ namespace ControleAcessoCondominio
 
             //Populando a ListView
             lvMoradores.Items.Clear();
+            //Atualizando a list de moradores de Condomínio
+            //Condominio.Self.Moradores.Clear();
             
             for (int i = 0; i < tabela.Rows.Count; i++)
             {
                 DataRow drow = tabela.Rows[i];
                 if (drow.RowState != DataRowState.Deleted)
                 {
-                    ListViewItem lvi = new ListViewItem(drow["Nome"].ToString());
-                    lvi.SubItems.Add(drow["Cpf"].ToString());
-                    lvi.SubItems.Add(drow["IsAtivo"].ToString());
+                    string nome = drow["Nome"].ToString();
+                    string cpf = drow["Cpf"].ToString();
+                    bool isAtivo = (bool)drow["IsAtivo"];
+                    ListViewItem lvi = new ListViewItem(nome);
+                    lvi.SubItems.Add(cpf);
+                    lvi.SubItems.Add(isAtivo.ToString());
 
                     lvMoradores.Items.Add(lvi);
+
+                    //Atualizando o Condomínio
+                    Morador morador;
+                    morador = Condominio.Self.BuscarMorador(cpf);
+                    if (morador != null)
+                    {
+                        morador.Nome = nome;
+                        morador.IsAtivo = isAtivo;
+                    }
+                    else
+                    {
+                        morador = new Morador(nome, cpf, "");
+                        morador.IsAtivo = isAtivo;
+                        Condominio.Self.AdicionarMorador(morador);
+                    }
                 }
             }
 
@@ -200,6 +221,134 @@ namespace ControleAcessoCondominio
         private void FormMorador_Shown(object sender, EventArgs e)
         {
             AtualizarMoradores();
+        }
+
+        private void dgvMoradores_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void btMudarSenhaDgv_Click(object sender, EventArgs e)
+        {
+            if (dgvMoradores.SelectedCells.Count > 0)
+            {
+                lbNovaSenhaDgv.Visible = true;
+                tbNovaSenhaDgv.Visible = true;
+                btOkNovaSenhaDgv.Visible = true;
+                btAtivarMoradorDgv.Enabled = false;
+                btMudarSenhaDgv.Enabled = false;
+                dgvMoradores.Enabled = false;
+            }
+        }
+
+        private void FormMorador_VisibleChanged(object sender, EventArgs e)
+        {
+            AtualizarMoradores();
+        }
+
+        private void btOkNovaSenhaDgv_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine(dgvMoradores.SelectedCells.Count);
+            if (dgvMoradores.SelectedCells.Count > 0)
+            {
+               
+                DataGridViewRow itemMorador = dgvMoradores.SelectedCells[0].OwningRow;
+                Debug.WriteLine(itemMorador.Cells[1].Value.ToString());
+                string cpf = itemMorador.Cells[1].Value.ToString();
+                Morador m = Condominio.Self.BuscarMorador(cpf);
+                if (m != null)
+                {
+                    try
+                    {
+                        if (Banco.MudarSenhaMorador(m, tbNovaSenhaDgv.Text) > 0 &&
+                            m.MudarSenha(tbNovaSenhaDgv.Text))
+                        {
+                            MessageBox.Show("Senha modificada com sucesso!");
+                            
+                        }
+                        else MessageBox.Show("A senha precisa ter mais de 6 dígitos");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro ao mudar a senha. {ex.ToString()}");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Morador não encontrado.");
+                }
+                lbNovaSenhaDgv.Visible = false;
+                tbNovaSenhaDgv.Visible = false;
+                btOkNovaSenhaDgv.Visible = false;
+                btAtivarMoradorDgv.Enabled = false;
+                btMudarSenhaDgv.Enabled = false;
+                tbNovaSenhaDgv.Text = "";
+                dgvMoradores.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Nenhum registro selecionado!");
+            }
+        }
+
+        private void dgvMoradores_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            
+        }
+
+        private void dgvMoradores_SelectionChanged(object sender, EventArgs e)
+        {
+            Debug.WriteLine(dgvMoradores.SelectedCells.Count);
+            if (dgvMoradores.SelectedCells.Count > 0)
+            {
+                btAtivarMoradorDgv.Enabled = true;
+                btMudarSenhaDgv.Enabled = true;
+            }
+            else
+            {
+                btAtivarMoradorDgv.Enabled = false;
+                btMudarSenhaDgv.Enabled = false;
+            }
+        }
+
+        private void dgvMoradores_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            Debug.WriteLine("cellbeginedit");
+            //Debug.WriteLine(dgvMoradores.SelectedCells.Count);
+            if (dgvMoradores.SelectedCells.Count > 0)
+            {
+
+                DataGridViewRow itemMorador = dgvMoradores.SelectedCells[0].OwningRow;
+                Debug.WriteLine(itemMorador.Cells[2].Value.ToString());
+                string cpf = itemMorador.Cells[1].Value.ToString();
+                bool isAtivo = (bool)itemMorador.Cells[2].Value;
+                Morador m = Condominio.Self.BuscarMorador(cpf);
+                if (m != null)
+                {
+                    try
+                    {
+                        if (Banco.MudarIsAtivoMorador(m, isAtivo) > 0)
+                        {
+                            m.IsAtivo = isAtivo;
+                            MessageBox.Show("Estado modificado com sucesso!");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erro ao mudar o estado. {ex.ToString()}");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Morador não encontrado.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nenhum registro selecionado!");
+            }
         }
     }
 }

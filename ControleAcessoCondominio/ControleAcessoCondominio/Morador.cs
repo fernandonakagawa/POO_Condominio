@@ -16,8 +16,8 @@ namespace ControleAcessoCondominio
 
         public Morador(string nome, string cpf, string senha):base(nome, cpf)
         {
-            Nome = nome;
-            Cpf = cpf;
+            Nome = nome.Trim();
+            Cpf = cpf.Trim() ;
             Senha = senha;
             IsAtivo = true;
         }

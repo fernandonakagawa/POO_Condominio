@@ -39,3 +39,14 @@ SELECT Pessoas.Nome, Pessoas.Cpf, Moradores.IsAtivo
 FROM Pessoas
 INNER JOIN Moradores ON Pessoas.IdPessoa = Moradores.IdMorador
 AND Pessoas.Nome LIKE '%g%'; 
+
+SELECT IdPessoa FROM Pessoas WHERE Cpf = '12312312312';
+
+SELECT Pessoas.IdPessoa, Pessoas.Nome, Pessoas.Cpf,
+Moradores.Senha, Moradores.IsAtivo 
+FROM Pessoas
+INNER JOIN Moradores ON Pessoas.IdPessoa = Moradores.IdMorador;
+
+UPDATE Moradores
+SET Senha = '222222' 
+WHERE IdMorador = (SELECT IdPessoa FROM Pessoas WHERE Cpf = '12312312312');
