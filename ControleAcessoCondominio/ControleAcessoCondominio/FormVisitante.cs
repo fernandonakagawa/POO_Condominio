@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +21,7 @@ namespace ControleAcessoCondominio
             this.formPainelDeControle = formPainelDeControle;
         }
 
-        public void Atualizar()
+        public void AtualizarListViews()
         {
             lvMoradores.Items.Clear();
             lvVisitantes.Items.Clear();
@@ -31,6 +33,44 @@ namespace ControleAcessoCondominio
                 else item.SubItems.Add("Não");
                 lvMoradores.Items.Add(item);
             }
+        }
+
+        public void AtualizarDataGridViewMoradores(SqlDataAdapter adaptador = null,
+            string textoLabel = "TODOS os moradores:")
+        {
+            if (adaptador == null) adaptador = Banco.SelectMoradores();
+
+            DataTable tabela = new DataTable();
+            adaptador.Fill(tabela);
+            //Populando a DataGridView
+            dgvMoradores.DataSource = tabela;
+
+            for (int i = 0; i < tabela.Rows.Count; i++)
+            {
+                DataRow drow = tabela.Rows[i];
+                if (drow.RowState != DataRowState.Deleted)
+                {
+                    string nome = drow["Nome"].ToString();
+                    string cpf = drow["Cpf"].ToString();
+                    bool isAtivo = (bool)drow["IsAtivo"];
+
+                    //Atualizando o Condomínio
+                    Morador morador;
+                    morador = Condominio.Self.BuscarMorador(cpf);
+                    if (morador != null)
+                    {
+                        morador.Nome = nome;
+                        morador.IsAtivo = isAtivo;
+                    }
+                    else
+                    {
+                        morador = new Morador(nome, cpf, "");
+                        morador.IsAtivo = isAtivo;
+                        Condominio.Self.AdicionarMorador(morador);
+                    }
+                }
+            }
+
         }
 
         private void btAdicionarVisitante_Click(object sender, EventArgs e)
@@ -100,6 +140,28 @@ namespace ControleAcessoCondominio
                         }
                     }
                 }
+            }
+        }
+
+        private void dgvMoradores_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvMoradores.SelectedCells.Count > 0)
+            {
+                int linhaSelecionada = dgvMoradores.SelectedCells[0].RowIndex;
+                string cpfMorador = dgvMoradores.Rows[linhaSelecionada].Cells[1].Value.ToString();
+                try
+                {
+                    SqlDataAdapter adaptador = Banco.BuscarVisitantes(cpfMorador);
+                    DataTable tabela = new DataTable();
+                    adaptador.Fill(tabela);
+                    //Populando a DataGridView
+                    dgvVisitantes.DataSource = tabela;
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                }
+               
             }
         }
     }

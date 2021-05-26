@@ -74,7 +74,8 @@ namespace ControleAcessoCondominio
         private void btAdicionarVisitante_Click(object sender, EventArgs e)
         {
             formVisitante.Show();
-            formVisitante.Atualizar();
+            formVisitante.AtualizarDataGridViewMoradores();
+            formVisitante.AtualizarListViews();
             this.Hide();
         }
 

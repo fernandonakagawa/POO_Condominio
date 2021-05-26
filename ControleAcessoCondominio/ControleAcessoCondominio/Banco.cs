@@ -130,5 +130,16 @@ namespace ControleAcessoCondominio
             Debug.WriteLine($"MudarIsAtivoMorador {linhasAfetadas}");
             return linhasAfetadas;
         }
+
+        public static SqlDataAdapter BuscarVisitantes(string cpfMorador)
+        {
+            sql = new SqlCommand();
+            sql.CommandText = $"SELECT Pessoas_Visitantes_View.Nome, Pessoas_Visitantes_View.Cpf " +
+                $"FROM Pessoas_Visitantes_View " +
+                $"INNER JOIN Pessoas_Moradores_View ON Pessoas_Visitantes_View.IdMorador = Pessoas_Moradores_View.IdPessoa " +
+                $"WHERE Pessoas_Moradores_View.Cpf = '{cpfMorador}'; ";
+            Executar(out SqlDataAdapter adaptador);
+            return adaptador;
+        }
     }
 }

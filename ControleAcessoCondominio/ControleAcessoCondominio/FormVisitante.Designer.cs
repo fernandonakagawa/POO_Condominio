@@ -44,6 +44,10 @@ namespace ControleAcessoCondominio
             this.tbNome = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btVoltar = new System.Windows.Forms.Button();
+            this.dgvMoradores = new System.Windows.Forms.DataGridView();
+            this.dgvVisitantes = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVisitantes)).BeginInit();
             this.SuspendLayout();
             // 
             // lvMoradores
@@ -174,11 +178,30 @@ namespace ControleAcessoCondominio
             this.btVoltar.UseVisualStyleBackColor = true;
             this.btVoltar.Click += new System.EventHandler(this.btVoltar_Click);
             // 
+            // dgvMoradores
+            // 
+            this.dgvMoradores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMoradores.Location = new System.Drawing.Point(562, 46);
+            this.dgvMoradores.Name = "dgvMoradores";
+            this.dgvMoradores.Size = new System.Drawing.Size(533, 228);
+            this.dgvMoradores.TabIndex = 18;
+            this.dgvMoradores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMoradores_CellClick);
+            // 
+            // dgvVisitantes
+            // 
+            this.dgvVisitantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVisitantes.Location = new System.Drawing.Point(562, 309);
+            this.dgvVisitantes.Name = "dgvVisitantes";
+            this.dgvVisitantes.Size = new System.Drawing.Size(533, 228);
+            this.dgvVisitantes.TabIndex = 19;
+            // 
             // FormVisitante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 656);
+            this.ClientSize = new System.Drawing.Size(1181, 656);
+            this.Controls.Add(this.dgvVisitantes);
+            this.Controls.Add(this.dgvMoradores);
             this.Controls.Add(this.btVoltar);
             this.Controls.Add(this.btAdicionarVisitante);
             this.Controls.Add(this.tbCpf);
@@ -191,6 +214,8 @@ namespace ControleAcessoCondominio
             this.Controls.Add(this.lvMoradores);
             this.Name = "FormVisitante";
             this.Text = "FormVisitante";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMoradores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVisitantes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,5 +238,7 @@ namespace ControleAcessoCondominio
         private System.Windows.Forms.TextBox tbNome;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btVoltar;
+        private System.Windows.Forms.DataGridView dgvMoradores;
+        private System.Windows.Forms.DataGridView dgvVisitantes;
     }
 }
